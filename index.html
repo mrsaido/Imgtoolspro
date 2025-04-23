@@ -49,17 +49,15 @@
     <div class="container mx-auto px-4 py-12">
         <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
             <!-- Header -->
-            <div class="bg-custom text-white py-6 px-8">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h1 class="text-3xl font-bold">Img Tools Pro</h1>
-                        <p class="opacity-90">Redimensionner, compresser et supprimer les arrière-plans des images</p>
-                    </div>
-                    <div class="bg-white bg-opacity-20 p-3 rounded-full">
-                        <i class="fas fa-tools text-2xl"></i>
-                    </div>
-                </div>
-            </div>
+           <div class="bg-custom text-white py-6 px-8">
+			<div class="flex justify-center text-center">
+				<div>
+					<h1 class="text-3xl font-bold">Img Tools Pro</h1>
+					<p class="opacity-90">Redimensionner, compresser et supprimer les arrière-plans des images</p>
+				</div>
+			</div>
+		</div>
+
 
             <!-- Tabs -->
             <div class="flex border-b border-gray-200">
@@ -165,11 +163,12 @@
                             </div>
                         </div>
 
-                        <!-- Download Button -->
-                        <button id="downloadBtn" disabled class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center space-x-2">
-                            <i class="fas fa-download"></i>
-                            <span>Télécharger l'image redimensionnée</span>
-                        </button>
+                        <button id="downloadBtn" disabled
+								class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg transition flex items-center justify-center space-x-2 opacity-50 cursor-not-allowed hover:bg-indigo-700 disabled:hover:bg-indigo-600">
+								<i class="fas fa-download"></i>
+										<span>Télécharger l'image redimensionnée</span>
+						</button>
+
 
                         <!-- Image Info -->
                         <div id="imageInfo" class="mt-4 hidden">
@@ -1370,5 +1369,46 @@
             }
         });
     </script>
-<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=joaobraga1993/image-tools-pro" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=joaobraga1993/image-tools-pro" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const applyBtn = document.getElementById("applyBtn");
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        function enableDownloadButton() {
+            downloadBtn.disabled = false;
+            downloadBtn.classList.remove("opacity-50", "cursor-not-allowed");
+        }
+
+        function disableDownloadButton() {
+            downloadBtn.disabled = true;
+            downloadBtn.classList.add("opacity-50", "cursor-not-allowed");
+        }
+
+        applyBtn.addEventListener("click", function () {
+            // Simuler un traitement (par ex. redimensionnement)
+            setTimeout(() => {
+                enableDownloadButton();
+            }, 500);
+        });
+
+        // Re-désactiver si l'utilisateur modifie les réglages
+        const inputs = document.querySelectorAll("#outputWidth, #outputHeight, #resizeMode, #paddingColor, #customColor, #upscaleCheckbox");
+
+        inputs.forEach(input => {
+            input.addEventListener("change", () => {
+                disableDownloadButton();
+            });
+        });
+
+        // Désactiver par défaut au chargement
+        disableDownloadButton();
+    });
+</script>
+
+
+
+
+
+</body>
 </html>
