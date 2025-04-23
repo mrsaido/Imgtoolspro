@@ -49,30 +49,27 @@
     <div class="container mx-auto px-4 py-12">
         <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
             <!-- Header -->
-            <div class="bg-custom text-white py-6 px-8">
-                <div class="flex items-center justify-center text-center w-full">
-                    <div>
-                        <h1 class="text-3xl font-bold">Img Tools Pro</h1>
-                        <p class="opacity-90">Redimensionner, compresser et supprimer les arrière-plans des images</p>
-                    </div>
-                    <div class="bg-white bg-opacity-0 p-3 rounded-full">
-                       
-                    </div>
-                </div>
-            </div>
+           <div class="bg-custom text-white py-6 px-8">
+			<div class="flex justify-center text-center">
+				<div>
+					<h1 class="text-3xl font-bold">Img Tools Pro</h1>
+					<p class="opacity-90">Redimensionner, compresser et supprimer les arrière-plans des images</p>
+				</div>
+			</div>
+		</div>
+
 
             <!-- Tabs -->
             <div class="flex border-b border-gray-200">
-				 <button id="bgRemoveTab" class="tab-button flex-1 py-3 px-4 text-center font-medium">
-                    <i class="fas fa-cut mr-2"></i> Supprimer l'arrière-plan
-                </button>
                 <button id="resizeTab" class="tab-button active flex-1 py-3 px-4 text-center font-medium">
                     <i class="fas fa-expand mr-2"></i> Redimensionner
                 </button>
                 <button id="compressTab" class="tab-button flex-1 py-3 px-4 text-center font-medium">
                     <i class="fas fa-compress-alt mr-2"></i> Compresse
                 </button>
-               
+                <button id="bgRemoveTab" class="tab-button flex-1 py-3 px-4 text-center font-medium">
+                    <i class="fas fa-cut mr-2"></i> Supprimer l'arrière-plan
+                </button>
             </div>
 
             <!-- Main Content -->
@@ -166,11 +163,12 @@
                             </div>
                         </div>
 
-                        <!-- Download Button -->
-                        <button id="downloadBtn" disabled class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center space-x-2">
-                            <i class="fas fa-download"></i>
-                            <span>Télécharger</span>
-                        </button>
+                        <button id="downloadBtn" disabled
+								class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg transition flex items-center justify-center space-x-2 opacity-50 cursor-not-allowed hover:bg-indigo-700 disabled:hover:bg-indigo-600">
+								<i class="fas fa-download"></i>
+										<span>Télécharger l'image redimensionnée</span>
+						</button>
+
 
                         <!-- Image Info -->
                         <div id="imageInfo" class="mt-4 hidden">
@@ -320,138 +318,139 @@
                         <!-- Download Button -->
                         <button id="downloadCompressedBtn" disabled class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center space-x-2">
                             <i class="fas fa-download"></i>
-                            <span>Télécharger</span>
+                            <span>Télécharger l'image compressée</span>
                         </button>
                     </div>
                 </div>
 
-               <!-- Panneau de suppression de l'arrière-plan -->
-<div id="bgRemovePanel" class="hidden grid md:grid-cols-2 gap-8">
-    <!-- Section de téléversement -->
-    <div>
-        <div id="bgRemoveDropzone" class="dropzone rounded-lg p-8 text-center cursor-pointer mb-6">
-            <div class="flex flex-col items-center justify-center space-y-4">
-                <i class="fas fa-cloud-upload-alt text-5xl text-indigo-500"></i>
-                <h3 class="text-xl font-semibold">Glissez-déposez votre image ici</h3>
-                <p class="text-gray-500">ou cliquez pour sélectionner</p>
-                <input type="file" id="bgRemoveFileInput" class="hidden" accept="image/*">
-                <button id="bgRemoveSelectFileBtn" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
-                    Sélectionner un fichier
-                </button>
-            </div>
-        </div>
-
-        <!-- Paramètres -->
-        <div class="bg-gray-50 p-6 rounded-lg">
-            <h3 class="font-semibold text-lg mb-4">Paramètres de suppression de l’arrière-plan</h3>
-
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Précision</label>
-                    <input type="range" id="precisionSlider" min="1" max="10" value="7" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-                    <div class="flex justify-between text-xs text-gray-500">
-                        <span>Rapide</span>
-                        <span id="precisionValue">7/10</span>
-                        <span>Précis</span>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Couleur d’arrière-plan</label>
-                    <select id="bgColor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5">
-                        <option value="transparent">Transparent</option>
-                        <option value="white">Blanc</option>
-                        <option value="black">Noir</option>
-                        <option value="custom">Personnalisé</option>
-                    </select>
-                </div>
-
-                <div id="bgCustomColorContainer" class="hidden">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Couleur personnalisée</label>
-                    <input type="color" id="bgCustomColor" value="#ffffff" class="w-full h-10">
-                </div>
-
-                <div>
-                    <label class="flex items-center space-x-2">
-                        <input type="checkbox" id="edgeRefinement" checked class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500">
-                        <span class="text-sm font-medium text-gray-700">Affinage des bords</span>
-                    </label>
-                </div>
-
-                <div>
-                    <label class="flex items-center space-x-2">
-                        <input type="checkbox" id="autoCrop" class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500">
-                        <span class="text-sm font-medium text-gray-700">Rogner automatiquement</span>
-                    </label>
-                </div>
-
-                <button id="removeBgBtn" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition">
-                    Supprimer l’arrière-plan
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Section d’aperçu -->
-    <div>
-        <div class="border border-gray-200 rounded-lg p-4 mb-6">
-            <h3 class="font-semibold text-lg mb-4">Résultat</h3>
-            <div class="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                    <h4 class="text-center text-sm font-medium text-gray-700 mb-2">Original</h4>
-                    <div id="originalBgPreview" class="flex items-center justify-center bg-gray-100 rounded-lg min-h-64">
-                        <p class="text-gray-500 text-center p-8">Original</p>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-center text-sm font-medium text-gray-700 mb-2">Sans arrière-plan</h4>
-                    <div id="bgRemovedPreview" class="flex items-center justify-center bg-gray-100 rounded-lg min-h-64 transparent-bg">
-                        <p class="text-gray-500 text-center p-8">Sans arrière-plan</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-gray-50 p-4 rounded-lg">
-                <h4 class="font-medium mb-2">Informations</h4>
-                <div class="grid grid-cols-2 gap-2 text-sm">
+                <!-- Background Remove Panel -->
+                <div id="bgRemovePanel" class="hidden grid md:grid-cols-2 gap-8">
+                    <!-- Upload Section -->
                     <div>
-                        <span class="text-gray-500">Taille originale :</span>
-                        <span id="originalBgSize" class="font-medium">-</span>
+                        <div id="bgRemoveDropzone" class="dropzone rounded-lg p-8 text-center cursor-pointer mb-6">
+                            <div class="flex flex-col items-center justify-center space-y-4">
+                                <i class="fas fa-cloud-upload-alt text-5xl text-indigo-500"></i>
+                                <h3 class="text-xl font-semibold">Arraste e solte sua imagem aqui</h3>
+                                <p class="text-gray-500">ou clique para selecionar</p>
+                                <input type="file" id="bgRemoveFileInput" class="hidden" accept="image/*">
+                                <button id="bgRemoveSelectFileBtn" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
+                                    Selecionar Arquivo
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Settings -->
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="font-semibold text-lg mb-4">Configurações de Remoção de Fundo</h3>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Precisão</label>
+                                    <input type="range" id="precisionSlider" min="1" max="10" value="7" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                                    <div class="flex justify-between text-xs text-gray-500">
+                                        <span>Rápido</span>
+                                        <span id="precisionValue">7/10</span>
+                                        <span>Preciso</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Cor de Fundo</label>
+                                    <select id="bgColor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5">
+                                        <option value="transparent">Transparente</option>
+                                        <option value="white">Branco</option>
+                                        <option value="black">Preto</option>
+                                        <option value="custom">Personalizado</option>
+                                    </select>
+                                </div>
+
+                                <div id="bgCustomColorContainer" class="hidden">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Cor Personalizada</label>
+                                    <input type="color" id="bgCustomColor" value="#ffffff" class="w-full h-10">
+                                </div>
+
+                                <div>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" id="edgeRefinement" checked class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500">
+                                        <span class="text-sm font-medium text-gray-700">Refinamento de bordas</span>
+                                    </label>
+                                </div>
+
+                                <div>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" id="autoCrop" class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500">
+                                        <span class="text-sm font-medium text-gray-700">Recortar automaticamente</span>
+                                    </label>
+                                </div>
+
+                                <button id="removeBgBtn" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition">
+                                    Remover Fundo
+                                </button>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Preview Section -->
                     <div>
-                        <span class="text-gray-500">Taille après traitement :</span>
-                        <span id="processedBgSize" class="font-medium">-</span>
-                    </div>
-                    <div>
-                        <span class="text-gray-500">Dimensions :</span>
-                        <span id="bgDimensions" class="font-medium">-</span>
-                    </div>
-                    <div>
-                        <span class="text-gray-500">Format :</span>
-                        <span id="bgFormat" class="font-medium">PNG</span>
+                        <div class="border border-gray-200 rounded-lg p-4 mb-6">
+                            <h3 class="font-semibold text-lg mb-4">Resultado</h3>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <h4 class="text-center text-sm font-medium text-gray-700 mb-2">Original</h4>
+                                    <div id="originalBgPreview" class="flex items-center justify-center bg-gray-100 rounded-lg min-h-64">
+                                        <p class="text-gray-500 text-center p-8">Original</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-center text-sm font-medium text-gray-700 mb-2">Sem Fundo</h4>
+                                    <div id="bgRemovedPreview" class="flex items-center justify-center bg-gray-100 rounded-lg min-h-64 transparent-bg">
+                                        <p class="text-gray-500 text-center p-8">Sem fundo</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-medium mb-2">Informações</h4>
+                                <div class="grid grid-cols-2 gap-2 text-sm">
+                                    <div>
+                                        <span class="text-gray-500">Tamanho original:</span>
+                                        <span id="originalBgSize" class="font-medium">-</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-500">Tamanho processado:</span>
+                                        <span id="processedBgSize" class="font-medium">-</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-500">Dimensões:</span>
+                                        <span id="bgDimensions" class="font-medium">-</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-500">Formato:</span>
+                                        <span id="bgFormat" class="font-medium">PNG</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div id="bgProgressContainer" class="hidden mb-6">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-700">Processando...</span>
+                                <span id="bgProgressPercent" class="text-sm font-medium text-gray-700">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="bgProgressBar" class="progress-bar bg-indigo-600 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Download Button -->
+                        <button id="downloadBgRemovedBtn" disabled class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center space-x-2">
+                            <i class="fas fa-download"></i>
+                            <span>Baixar Imagem Sem Fundo</span>
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Barre de progression -->
-        <div id="bgProgressContainer" class="hidden mb-6">
-            <div class="flex justify-between mb-1">
-                <span class="text-sm font-medium text-gray-700">Traitement en cours...</span>
-                <span id="bgProgressPercent" class="text-sm font-medium text-gray-700">0%</span>
-            </div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div id="bgProgressBar" class="progress-bar bg-indigo-600 h-2.5 rounded-full" style="width: 0%"></div>
-            </div>
-        </div>
-
-        <!-- Bouton de téléchargement -->
-        <button id="downloadBgRemovedBtn" disabled class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center space-x-2">
-            <i class="fas fa-download"></i>
-            <span>Télécharger</span>
-        </button>
-    </div>
-</div>
 
             <!-- Footer -->
             <div class="bg-gray-50 px-8 py-4 text-center text-sm text-gray-500">
@@ -1370,5 +1369,46 @@
             }
         });
     </script>
-<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://www.svgrepo.com/show/501921/love.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="#" style="color: #fff;text-decoration: underline;" target="_blank" >By</a> <a href="#" style="color: #fff;text-decoration: underline;" target="_blank" >Essaid</a></p></body>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=joaobraga1993/image-tools-pro" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const applyBtn = document.getElementById("applyBtn");
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        function enableDownloadButton() {
+            downloadBtn.disabled = false;
+            downloadBtn.classList.remove("opacity-50", "cursor-not-allowed");
+        }
+
+        function disableDownloadButton() {
+            downloadBtn.disabled = true;
+            downloadBtn.classList.add("opacity-50", "cursor-not-allowed");
+        }
+
+        applyBtn.addEventListener("click", function () {
+            // Simuler un traitement (par ex. redimensionnement)
+            setTimeout(() => {
+                enableDownloadButton();
+            }, 500);
+        });
+
+        // Re-désactiver si l'utilisateur modifie les réglages
+        const inputs = document.querySelectorAll("#outputWidth, #outputHeight, #resizeMode, #paddingColor, #customColor, #upscaleCheckbox");
+
+        inputs.forEach(input => {
+            input.addEventListener("change", () => {
+                disableDownloadButton();
+            });
+        });
+
+        // Désactiver par défaut au chargement
+        disableDownloadButton();
+    });
+</script>
+
+
+
+
+
+</body>
 </html>
